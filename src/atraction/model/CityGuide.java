@@ -41,4 +41,26 @@ public class CityGuide {
                 .sorted(Comparator.comparingDouble(attraction -> attraction.average()))
                 .collect(Collectors.toList());
     }
+
+    public void printAllReviewable() {
+        attractions.stream()
+                .flatMap(attraction -> attraction.getReviews().stream()
+                        .map(review -> attraction.getName() + ": " + review))
+                .forEach(System.out::println);
+    }
+
+    public void printAllInGroupReviewable(String type) {
+        attractions.stream()
+                .filter(attraction -> attraction.getType().equals(type))
+                .flatMap(attraction -> attraction.getReviews().stream()
+                        .map(review -> attraction.getName() + ": " + review))
+                .forEach(System.out::println);
+    }
+
+    public void printAttractionReviewable(String name) {
+        attractions.stream()
+                .filter(attraction -> attraction.getName().equals(name))
+                .map(Attraction::getReviews)
+                .forEach(System.out::println);
+    }
 }

@@ -9,6 +9,6 @@ public class Park extends Attraction {
 
     @Override
     public String toString() {
-        return "Park{" + getName() + getDescription() + "}";
+        return "Park{" + getName() +"; "+ getDescription() + "}";
     }
 }

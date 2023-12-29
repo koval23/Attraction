@@ -4,11 +4,15 @@ public class Museum extends Attraction {
     private double priceTicket;
     private double kasse;
 
+    public Museum(String name, String description) {
+        super(name, description, "Museum");
 
+    }
     public Museum(String name, String description,double priceTicket) {
         super(name, description, "Museum");
         this.priceTicket = priceTicket;
     }
+
 
     public boolean payTicket(int count) {
         if (count <= 0) return false;

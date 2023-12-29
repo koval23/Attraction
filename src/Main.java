@@ -8,30 +8,6 @@ public class Main {
     public static void main(String[] args) {
 
 
-//        neuesMuseum.addReview("Потрясающая коллекция Египта.");
-
-
-//        alteNationalgalerie.addReview("Прекрасные образцы немецкого искусства 19 века.");
-//        -----------------------------------------------------
-
-//        tiergarten.addReview("Прекрасное место для прогулок на свежем воздухе.");
-
-//        treptowerPark.addReview("Замечательный вид на реку и отличные места для пикника.");
-
-
-//        tempelhoferFeld.addReview("Уникальное место с историей, отлично подходит для катания на велосипеде.");
-//        -----------------------------------------------------
-
-//        brandenburgGate.addReview("Величественное и исторически значимое место.");
-
-//        reichstag.addReview("Интересное место с панорамным видом на город.");
-
-
-//        checkpointCharlie.addReview("Место с уникальной историей, стоит посетить.");
-//        -----------------------------------------------------
-
-
-
         List<Attraction> attractionList = new ArrayList<>(Arrays.asList(
                 new Museum("Pergamon Museum", "Один из крупнейших музеев в Германии", 15.0),
                 new Museum("Neues Museum", "Дом для коллекции египетских артефактов", 12.0),
@@ -44,30 +20,91 @@ public class Main {
                 new HistoricalSite("Checkpoint Charlie", "Знаковое место холодной войны")
         ));
 
+        attractionList.get(0).addReview("Отличная экспозиция древних артефактов!");
+        attractionList.get(1).addReview("Потрясающая коллекция Египта.");
+        attractionList.get(2).addReview("Прекрасные образцы немецкого искусства 19 века.");
+//        -----------------------------------------------------
+        attractionList.get(3).addReview("Прекрасное место для прогулок на свежем воздухе.");
+        attractionList.get(4).addReview("Замечательный вид на реку и отличные места для пикника.");
+        attractionList.get(5).addReview("Уникальное место с историей, отлично подходит для катания на велосипеде.");
+//        -----------------------------------------------------
+        attractionList.get(6).addReview("Величественное и исторически значимое место.");
+        attractionList.get(7).addReview("Интересное место с панорамным видом на город.");
+        attractionList.get(8).addReview("Место с уникальной историей, стоит посетить.");
+//        -----------------------------------------------------
         CityGuide attractionCityGuide = new CityGuide(attractionList);
+//---------------------------------------------------------------------------
+        Scanner scanner = new Scanner(System.in);
 
-//        attractionCityGuide.get(0).addReview("Отличная экспозиция древних артефактов!");
+        while (true) {
+            System.out.println("1: Показать все достопримечательности");
+            System.out.println("2: Добавить отзыв о достопримечательности");
+            System.out.println("3: Поиск по названию");
+            System.out.println("4: Показать по популярности");
+            System.out.println("5: Показать все отзывы");
+            System.out.println("6: Показать отзывы группы атракционнов");
+            System.out.println("7: Показать отзыв атракционна");
+            System.out.println("0: ВЫХОД");
+            int res = scanner.nextInt();
+            scanner.nextLine();
+            switch (res) {
+                case 1:
+                    attractionCityGuide.getAttractions();
+                    break;
 
-        attractionCityGuide.getAttractions();
+                case 2:
+                    System.out.println("Введите название");
+                    String name = scanner.nextLine();
+                    Attraction result = attractionCityGuide.findAttraction(name);
+                    if (result != null) {
+                        System.out.println("Вводите отзыв!");
+                        String review = scanner.nextLine();
+                        result.addReview(review);
+                    } else {
+                        System.out.println("Такого атракциона нет!!!");
+                    }
+                    break;
 
+                case 3:
+                    System.out.println("Введите название");
+                    String nameAttraction = scanner.nextLine();
+                    result = attractionCityGuide.findAttraction(nameAttraction);
+                    if (result != null) {
+                        String review = scanner.nextLine();
+                        result.addReview(review);
+                    } else {
+                        System.out.println("Такого атракциона нет!!!");
+                    }
+                    break;
+                case 4:
+                    attractionCityGuide.populationAttraction().stream().forEach(System.out::println);
+                    break;
+                case 5:
+                    attractionCityGuide.printAllReviewable();
+                    break;
+                case 6:
+                    System.out.println("Введите группу атракционнов");
+                    String nameGroup = scanner.nextLine();
+                    attractionCityGuide.printAllInGroupReviewable(nameGroup);
+                    break;
+                case 7:
+                    System.out.println("Введите название");
+                    nameAttraction = scanner.nextLine();
+                    result = attractionCityGuide.findAttraction(nameAttraction);
+                    if (result != null) {
+                        attractionCityGuide.printAttractionReviewable(nameAttraction);
+                    } else {
+                        System.out.println("Такого атракциона нет!!!");
+                    }
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Нет такого пункта меню");
+            }
 
+        }
 
-
-
-
-
-//        if (attractionList.get(0) instanceof Museum) {
-//            Museum museum = (Museum) attractionList.get(0);
-//            museum.getListRewiew();
-//        }
-//        System.out.println(filterForType(attractionList, "HistoricalSite"));
-
-
-
-
-
-
+//---------------------------------------------------------------------------
     }
-
-
 }
